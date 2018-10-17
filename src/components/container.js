@@ -16,10 +16,13 @@ export default class Container extends React.Component {
       }
 
       this.updateDimensions = this.updateDimensions.bind(this);
+      this.getPosition = this.getPosition.bind(this);
     }
 
     componentDidMount() {
       console.log(this.state.h);
+      const p = document.getElementById('path')
+      console.log(p);
       // Additionally I could have just used an arrow function for the binding `this` to the component...
       window.addEventListener("resize", this.updateDimensions);
     }
@@ -41,6 +44,21 @@ export default class Container extends React.Component {
       // console.log(document.getElementById('path'))
     }
 
+    getPosition(p, pct) {
+      let x = window.innerHeight/2;
+      let y = window.innerWidth/2;
+      let cords = {x, y};
+
+      let pos = p.getPointAtLength(100)
+
+      console.log(pos);
+      var length = p.getTotalLength();
+      console.log(length);
+      // cords = p.getPointAtLength(pct * length)
+
+      return pos;
+    }
+
     translateAlong(path) {
       var l = path.getTotalLength();
       return function(d, i, a) {
@@ -55,11 +73,12 @@ export default class Container extends React.Component {
     render() {
       const { x, y } = this.state;
       const pathD = "M0.5 455 C358 455 360.5 5.5 720.5 5.5 C1080.5 5.5 1083 455 1440.5 455"
-      const p = document.getElementById('path')
+      // var p = document.getElementById('path')
     
-       const length = p.getTotalLength();
+      // var length = p.getTotalLength();
+      // console.log(p);
       
-      const cords = p.getPointAtLength(0.5 * length)
+      
 
       // console.log(cords);
 
@@ -73,7 +92,7 @@ export default class Container extends React.Component {
             fill="none" 
             xmlns="http://www.w3.org/2000/svg">
             <path id= "path" 
-                  d="M0.5 455 C358 455 360.5 5.5 720.5 5.5 C1080.5 5.5 1083 455 1440.5 455" 
+                  d="M0.2 455 C358 455 360.5 5.5 720.5 5.5 C1080.5 5.5 1083 455 1440.5 455" 
                   stroke="black" 
                   strokeWidth="10"
             />
@@ -83,10 +102,8 @@ export default class Container extends React.Component {
                     fill="#C4C4C4"
             />
 
-
-
-            <circle cx={cords.x} 
-                    cy={cords.y} 
+            <circle cx={this.getPosition(document.getElementById('path'), 0.5).x} 
+                    cy={this.getPosition(document.getElementById('path'), 0.5).y} 
                     r="50" 
                     fill="#C4C4C4"
             />
