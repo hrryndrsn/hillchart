@@ -52,8 +52,6 @@ export default class Container extends React.Component {
       var pct = (e.screenX / window.innerWidth) * length
       var crds = this.myRef.current.getPointAtLength(pct)
       
-      console.log(crds);
-
 
 
       this.setState({ x: e.screenX, y: e.screenY,  cx: crds.x, cy: crds.y}); 
@@ -62,8 +60,6 @@ export default class Container extends React.Component {
     fuck(path, x, y) {
       var p = document.createElementNS("http://www.w3.org/2000/svg", "path")
       p.setAttribute("d", "M0.5 455 C358 455 360.5 5.5 720.5 5.5 C1080.5 5.5 1083 455 1440.5 455")
-      console.log(this.myRef.current);
-      console.log(this.myRef.current);
       var ref = this.myRef.current;
       var l = 100;
       var s = (x / window.innerWidth) * l;
@@ -73,27 +69,31 @@ export default class Container extends React.Component {
         x: r.x,
         y: r.y
       } 
-
-      // console.log(path.getTotalLength())
-      console.log("x=" + r.x + ", y=" + r.y)
-      console.log(x, y);
-      console.log(isFinite(fs));
       
       return (
         <circle cx={c.x} 
         cy={c.y} 
         r="50" 
-        fill="#C4C4C4"
+        fill="#000000"
         />
       )
     }
+
+    handleClick(e) {
+      console.log('adsadad')
+      console.log(this.state.cx)
+      console.log(this.state.cy)
+
+    }
+
+  
   
     render() {
       // const { x, y } = this.state;
       const pathD = "M0.5 455 C358 455 360.5 5.5 720.5 5.5 C1080.5 5.5 1083 455 1440.5 455"
       
 
-      return <div onMouseMove={this._onMouseMove.bind(this)}>
+      return <div onClick={this.handleClick.bind(this)} onMouseMove={this._onMouseMove.bind(this)}>
         <div id="obj"></div>
         <p></p>
         <svg style={this.styles.svg} 
@@ -107,16 +107,16 @@ export default class Container extends React.Component {
                   strokeWidth="10"
                   ref={this.myRef}
             />
-            <circle cx={this.props.mouse.x} 
-                    cy={this.props.mouse.y} 
-                    r="50" 
-                    fill="#C4C4C4"
-            />
+
+            
 
             <circle cx={this.state.cx} 
                     cy={this.state.cy} 
-                    r="50" 
-                    fill="#C4C4C4"
+                    r="30" 
+                    fill={"#000"}
+                    stroke="#fff"
+                    strokeWidth="10"
+                    
             />
         </svg>
       </div>;
