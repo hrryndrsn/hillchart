@@ -14,7 +14,8 @@ export default class Container extends React.Component {
         cy: 0,
       };
 
-      this.myRef = React.createRef();
+      this.containerRef = React.createRef();
+      this.pathRef = React.createRef();
       this.updateDimensions = this.updateDimensions.bind(this);
     }
 
@@ -37,40 +38,39 @@ export default class Container extends React.Component {
     _onMouseMove(e) {
       //find point on the curve
       //need to use cords relative to new div position
-      var length = this.myRef.current.getTotalLength();
-      var pct = (e.screenX / (window.innerWidth)) * length
-      var crds = this.myRef.current.getPointAtLength(pct)
+      var length = this.pathRef.current.getTotalLength();
+      var offset = (this.state.w - (window.innerWidth * 0.8)) / 2
+      var containerWidth = this.state.w * 0.8
+      var relPct = ((e.screenX - offset)/containerWidth) * length
+      var crds = this.pathRef.current.getPointAtLength(relPct)
       
 
-      this.setState({ x: (e.screenX), y: e.screenY,  cx: crds.x, cy: crds.y}); 
+      console.log(containerWidth)
+      console.log()
+
+      this.setState({ x: e.screenX, y: e.screenY,  cx: crds.x, cy: crds.y}); 
     }
 
 
     handleClick(e) {
       //TODO - figure out the position as a percentage instead of a number
-      console.log(this.state.cx)
-      console.log(this.state.cy)
-      console.log(this.state.x / this.state.w) //x percentage
+      // console.log(this.state.cx)
+      // console.log(this.state.cy)
+      // console.log(this.state.x / this.state.w) //x percentage
 
     }
 
   
-    render() {
-      //TO DO - make curve responsive
-      const pathD = "M0.5 45 C35 45 36 5 72 5.5 C1080.5 5.5 1083 455 1440.5 455"
-      
-      return <div className="container" onClick={this.handleClick.bind(this)} onMouseMove={this._onMouseMove.bind(this)}>
+    render() {      
+      return <div className="container" ref={this.containerRef} onClick={this.handleClick.bind(this)} onMouseMove={this._onMouseMove.bind(this)}>
         <div id="obj"></div>
-            <svg 
-              width="100%" 
-              height="33%" 
-              viewBox="0 0 100 33" 
-              fill="none">
+        <svg width="100%" height="63%" viewBox="0 0 100 63" fill="none">
               <path 
-                d="M0 32C25.0747 32 25.25 1 50.5 1C75.75 1 75.9253 32 101 32" 
+                d="M5 43.9307C27.3438 43.9307 27.5 16 50 16C72.5 16 72.6562 43.9307 95 43.9307" 
                 stroke="black" 
                 strokeWidth="1"
-                ref={this.myRef}
+                ref={this.pathRef}
+              
               />
               <circle 
                 cx={this.state.cx} 
@@ -84,4 +84,7 @@ export default class Container extends React.Component {
       </div>;
     }
   }
+
+
+
 
