@@ -12,6 +12,9 @@ export default class Container extends React.Component {
         w: window.innerWidth,
         cx: 0,
         cy: 0,
+        curvePct: 0.0,
+        points: [],
+        uid: 2,
       };
 
       this.containerRef = React.createRef();
@@ -33,31 +36,48 @@ export default class Container extends React.Component {
     componentWillUnmount() {
       window.removeEventListener("resize", this.updateDimensions);
     }
-    
+
+    pointOnCrv(pct) {
+      var length = this.pathRef.current.getTotalLength();
+      var containerWidth = this.state.w * 0.8
+      var offset = (this.state.w - (window.innerWidth * 0.8)) / 2
+      var relPct = ((this.state.x - offset)/containerWidth) * length
+      var crds = this.pathRef.current.getPointAtLength(relPct)
+      return crds;
+    }
+
   
     _onMouseMove(e) {
       //find point on the curve
-      //need to use cords relative to new div position
       var length = this.pathRef.current.getTotalLength();
       var offset = (this.state.w - (window.innerWidth * 0.8)) / 2
       var containerWidth = this.state.w * 0.8
+      var pct = Math.floor(((e.screenX - offset)/containerWidth)*100) / 100
       var relPct = ((e.screenX - offset)/containerWidth) * length
       var crds = this.pathRef.current.getPointAtLength(relPct)
       
-
-      console.log(containerWidth)
-      console.log()
-
-      this.setState({ x: e.screenX, y: e.screenY,  cx: crds.x, cy: crds.y}); 
+      
+      this.setState({ x: e.screenX, y: e.screenY,  cx: crds.x, cy: crds.y, curvePct: pct}); 
     }
 
 
     handleClick(e) {
-      //TODO - figure out the position as a percentage instead of a number
-      // console.log(this.state.cx)
-      // console.log(this.state.cy)
-      // console.log(this.state.x / this.state.w) //x percentage
+      // console.log(this.pointOnCrv(this.state.curvePct))
+      this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
+      var i = this.state.uid + 1
+      this.setState({uid: i})
+    }
 
+    renderPoint(point) {      
+      return <circle 
+      cx={point.x} 
+      cy={point.y}
+      key={point.id} 
+      r="2.5" 
+      fill={"#000"}
+      stroke="#fff"
+      strokeWidth="1"
+      />
     }
 
   
@@ -70,17 +90,21 @@ export default class Container extends React.Component {
                 stroke="black" 
                 strokeWidth="1"
                 ref={this.pathRef}
-              
               />
               <circle 
                 cx={this.state.cx} 
                 cy={this.state.cy} 
-                r="2.5" 
+                r="1.5" 
                 fill={"#000"}
                 stroke="#fff"
                 strokeWidth="1"   
               />
+              {
+                this.state.points.map(point => this.renderPoint(point))
+              }
+
             </svg>
+
       </div>;
     }
   }
