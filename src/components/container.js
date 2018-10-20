@@ -1,5 +1,6 @@
 import React from 'react';
 import './container.css';
+import Point from './point'
 
 export default class Container extends React.Component {
   
@@ -69,15 +70,21 @@ export default class Container extends React.Component {
     }
 
     renderPoint(point) {      
-      return <circle 
-      cx={point.x} 
-      cy={point.y}
-      key={point.id} 
-      r="2.5" 
-      fill={"#000"}
-      stroke="#fff"
-      strokeWidth="1"
-      />
+      // return <circle 
+      // cx={point.x} 
+      // cy={point.y}
+      // key={point.id} 
+      // r="2.5" 
+      // fill={"#000"}
+      // stroke="#fff"
+      // strokeWidth="1"
+      // />
+      return <Point 
+        key={point.id} 
+        x={point.x} 
+        y={point.y}
+        id={point.id}
+        />
     }
 
   
