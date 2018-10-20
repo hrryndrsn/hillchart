@@ -15,6 +15,7 @@ export default class Container extends React.Component {
         cy: 0,
         curvePct: 0.0,
         points: [],
+        selectedPoint: 0,
         uid: 2,
       };
 
@@ -56,17 +57,35 @@ export default class Container extends React.Component {
       var pct = Math.floor(((e.screenX - offset)/containerWidth)*100) / 100
       var relPct = ((e.screenX - offset)/containerWidth) * length
       var crds = this.pathRef.current.getPointAtLength(relPct)
+      var selectedPoint;
+
+      if (e.target.id == "") {
+        selectedPoint = 0
+      } else {
+        selectedPoint = parseInt(e.target.id)
+      }
       
       
-      this.setState({ x: e.screenX, y: e.screenY,  cx: crds.x, cy: crds.y, curvePct: pct}); 
+      this.setState({ 
+        x: e.screenX, 
+        y: e.screenY,  
+        cx: crds.x, 
+        cy: crds.y, 
+        curvePct: pct,
+        selectedPoint,
+      }); 
     }
 
 
     handleClick(e) {
-      // console.log(this.pointOnCrv(this.state.curvePct))
-      this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
-      var i = this.state.uid + 1
-      this.setState({uid: i})
+      if (this.state.selectedPoint == 0) {
+        this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
+        var i = this.state.uid + 1
+        this.setState({uid: i})
+        return
+      } {
+        return
+      }
     }
 
     renderPoint(point) {      
@@ -98,14 +117,14 @@ export default class Container extends React.Component {
                 strokeWidth="1"
                 ref={this.pathRef}
               />
-              <circle 
+              {/* <circle 
                 cx={this.state.cx} 
                 cy={this.state.cy} 
                 r="1.5" 
                 fill={"#000"}
                 stroke="#fff"
                 strokeWidth="1"   
-              />
+              /> */}
               {
                 this.state.points.map(point => this.renderPoint(point))
               }

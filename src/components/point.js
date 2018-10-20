@@ -13,7 +13,11 @@ export default class Container extends React.Component {
     }
     
     handleClick(e) {
-        console.log(e.target)
+        console.log('Clicked point: ',this.state.id)
+    }
+
+    handleDrag(e) {
+        console.log('zzzz')
     }
     
     selected() {
@@ -22,7 +26,6 @@ export default class Container extends React.Component {
     }
 
     deselected() {
-        console.log('out')
         this.setState({color: "#000"})
     }
 
@@ -38,6 +41,7 @@ export default class Container extends React.Component {
             onClick={this.handleClick.bind(this)}
             onMouseEnter={this.selected.bind(this)}
             onMouseLeave={this.deselected.bind(this)}
+            id={this.state.id}
             />
     
     }
