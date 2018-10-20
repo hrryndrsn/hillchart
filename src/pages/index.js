@@ -9,13 +9,8 @@ let mouse = {
 document.addEventListener('mousemove', (event) => {
    mouse.x = event.x
    mouse.y = event.y
-    
-    // console.log(mouse)
 })
 
 export default () => <div>
-
         <Container mouse={mouse} />
-
-
 </div>

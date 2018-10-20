@@ -15,10 +15,7 @@ export default class Container extends React.Component {
       };
 
       this.myRef = React.createRef();
-
-
       this.updateDimensions = this.updateDimensions.bind(this);
-      // this.getPosition = this.getPosition.bind(this);
     }
 
     componentDidMount() {
@@ -41,11 +38,11 @@ export default class Container extends React.Component {
       //find point on the curve
       //need to use cords relative to new div position
       var length = this.myRef.current.getTotalLength();
-      var pct = (e.screenX / window.innerWidth) * length
+      var pct = (e.screenX / (window.innerWidth)) * length
       var crds = this.myRef.current.getPointAtLength(pct)
       
 
-      this.setState({ x: e.screenX, y: e.screenY,  cx: crds.x, cy: crds.y}); 
+      this.setState({ x: (e.screenX), y: e.screenY,  cx: crds.x, cy: crds.y}); 
     }
 
 
