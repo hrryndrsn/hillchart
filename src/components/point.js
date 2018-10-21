@@ -9,24 +9,24 @@ export default class Container extends React.Component {
             y: this.props.y,
             id: this.props.id,
             selected: false,
+            r: "2.5"
         }
     }
     
-    handleClick(e) {
-        console.log('Clicked point: ',this.state.id)
-    }
-
-    handleDrag(e) {
-        console.log('zzzz')
-    }
     
     selected() {
         console.log("selected point: ", this.state.id)
-        this.setState({color: "red"})
+        this.setState({
+            color: "red",
+            r: "3",
+        })
     }
 
     deselected() {
-        this.setState({color: "#000"})
+        this.setState({
+            color: "#000",
+            r: "2.5", 
+        })
     }
 
     render() {
@@ -34,11 +34,10 @@ export default class Container extends React.Component {
             cx={this.props.x} 
             cy={this.props.y}
             key={this.props.id} 
-            r="2.5" 
+            r={this.state.r}
             fill={this.state.color}
             stroke="#fff"
             strokeWidth="1"
-            onClick={this.handleClick.bind(this)}
             onMouseEnter={this.selected.bind(this)}
             onMouseLeave={this.deselected.bind(this)}
             id={this.state.id}

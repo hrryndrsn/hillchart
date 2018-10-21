@@ -89,15 +89,6 @@ export default class Container extends React.Component {
     }
 
     renderPoint(point) {      
-      // return <circle 
-      // cx={point.x} 
-      // cy={point.y}
-      // key={point.id} 
-      // r="2.5" 
-      // fill={"#000"}
-      // stroke="#fff"
-      // strokeWidth="1"
-      // />
       return <Point 
         key={point.id} 
         x={point.x} 
@@ -117,14 +108,6 @@ export default class Container extends React.Component {
                 strokeWidth="1"
                 ref={this.pathRef}
               />
-              {/* <circle 
-                cx={this.state.cx} 
-                cy={this.state.cy} 
-                r="1.5" 
-                fill={"#000"}
-                stroke="#fff"
-                strokeWidth="1"   
-              /> */}
               {
                 this.state.points.map(point => this.renderPoint(point))
               }
