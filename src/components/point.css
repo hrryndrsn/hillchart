@@ -1,6 +1,6 @@
 .point {
     fill:black;
-    transition: fill r  0.2s ease-in-out;
+    transition: r 0.2s ease-in-out;
 }
 
 .point:hover {

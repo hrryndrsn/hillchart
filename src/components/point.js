@@ -34,9 +34,9 @@ export default class Container extends React.Component {
         this.cords = {
             x: e.pageX,
             y: e.pageY,
-            isDragging: e.target.id == this.state.id,
+            isDragging: e.target.id === this.state.id,
         }
-        console.log(e.target.id == this.state.id)
+        console.log(e.target.id === this.state.id)
         document.addEventListener('mousemove', this.handleMouseMove);
     }
 
@@ -52,7 +52,7 @@ export default class Container extends React.Component {
     }
 
     renderClassList = () => {
-        if (this.props.activePoint == this.state.id) {
+        if (this.props.activePoint === this.state.id) {
             return "active"
         } else {
             return "point"
@@ -77,7 +77,7 @@ export default class Container extends React.Component {
             onMouseDown={this.handleMouseDown}
             onMouseUp={this.handleMouseUp}
             id={id}
-            className={this.props.activePoint == this.state.id ? "active point" : "point"}
+            className={this.props.activePoint === this.state.id ? "active point" : "point"}
             />
     
     }

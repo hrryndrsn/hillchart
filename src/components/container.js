@@ -131,8 +131,7 @@ export default class Container extends React.Component {
               {
                 this.state.points.map(point => this.renderPoint(point))
               }
-
-            </svg>
+        </svg>
 
       </div>)
     }
