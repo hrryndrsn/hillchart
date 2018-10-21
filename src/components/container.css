@@ -5,6 +5,5 @@ body {
 .container {
     margin: 0 auto;
     width: 90%;
-    display: flex;
     justify-items: center;
 }
