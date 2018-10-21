@@ -14,10 +14,11 @@ export default class Container extends React.Component {
       cy: 0,
       curvePct: 0.0,
       points: [],
-      selectedPoint: 0,
+      hoveredPoint: 0,
       uid: 2,
       isDragging: false,
       activePoint: 0,
+      selectedPoint: 0,
       name: "zord"
     };
 
@@ -62,12 +63,12 @@ export default class Container extends React.Component {
     var pct = Math.floor(((e.screenX - offset) / containerWidth) * 100) / 100;
     var relPct = ((e.screenX - offset) / containerWidth) * length;
     var crds = this.pathRef.current.getPointAtLength(relPct);
-    var selectedPoint;
+    var hoveredPoint;
 
     if (e.target.id === "") {
-      selectedPoint = 0;
+      hoveredPoint = 0;
     } else {
-      selectedPoint = parseInt(e.target.id);
+      hoveredPoint = parseInt(e.target.id);
     }
     this.setState({
       x: e.screenX,
@@ -75,15 +76,17 @@ export default class Container extends React.Component {
       cx: crds.x,
       cy: crds.y,
       curvePct: pct,
-      selectedPoint
+      hoveredPoint
     });
   }
 
   handleMouseDown(e) {
-    console.log(e.target == this.pathRef.current);
+    
     let activePoint = parseInt(e.target.id);
     this.setState({ isDragging: true, activePoint: activePoint });
-    if (this.state.selectedPoint === 0 && e.target == this.pathRef.current) {
+
+    //if no point is hovered and the target of the event was the path (hill) -> Add a new point 
+    if (this.state.hoveredPoint === 0 && e.target == this.pathRef.current) {
       this.state.points.push({
         name: "heuy",
         id: this.state.uid,
@@ -93,7 +96,15 @@ export default class Container extends React.Component {
       var i = this.state.uid + 1;
       this.setState({ uid: i });
       return;
+    } else if (e.target.id != "") {
+      let newSelection = parseInt(e.target.id)
+      this.setState({selectedPoint: newSelection})
+      return;
+    } else {
+      this.setState({selectedPoint: 0})
     }
+
+
   }
 
   handleMouseUp(e) {
@@ -111,14 +122,14 @@ export default class Container extends React.Component {
         cy={this.state.cy}
         isDragging={this.state.isDragging}
         activePoint={this.state.activePoint}
+        selectedPoint={this.state.selectedPoint}
         name={this.state.name}
       />
     );
   }
 
   handleNameChange(e) {
-    console.log(e.target.value)
-    this.setState({name: e.target.value});
+    this.setState({ name: e.target.value });
   }
 
   render() {

@@ -4,11 +4,16 @@
 }
 
 .point:hover {
-    fill: blue;
+    fill:grey;
 }
 
 .point.active {
     fill: blue;
+    r: 3;
+}
+
+.point.selected {
+    fill: red;
     r: 3;
 }
 

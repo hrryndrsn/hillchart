@@ -18,7 +18,6 @@ export default class Container extends React.Component {
   }
 
   selected() {
-    console.log("selected point: ", this.state.id);
     this.setState({
       selected: true
     });
@@ -36,7 +35,7 @@ export default class Container extends React.Component {
       y: e.pageY,
       isDragging: e.target.id === this.state.id
     };
-    console.log(e.target.id === this.state.id);
+
     document.addEventListener("mousemove", this.handleMouseMove);
   };
 
@@ -90,7 +89,11 @@ export default class Container extends React.Component {
           onMouseUp={this.handleMouseUp}
           id={id}
           className={
-            this.props.activePoint === this.state.id ? "active point" : "point"
+            (this.props.activePoint === this.state.id
+              ? "active point"
+              : "point") +
+            " " +
+            (this.props.selectedPoint === this.state.id ? "selected" : "")
           }
         />
       </svg>
