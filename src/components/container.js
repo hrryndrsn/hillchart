@@ -17,7 +17,8 @@ export default class Container extends React.Component {
       selectedPoint: 0,
       uid: 2,
       isDragging: false,
-      activePoint: 0
+      activePoint: 0,
+      name: "zord"
     };
 
     this.containerRef = React.createRef();
@@ -79,7 +80,7 @@ export default class Container extends React.Component {
   }
 
   handleMouseDown(e) {
-    console.log(e.target == this.pathRef.current)
+    console.log(e.target == this.pathRef.current);
     let activePoint = parseInt(e.target.id);
     this.setState({ isDragging: true, activePoint: activePoint });
     if (this.state.selectedPoint === 0 && e.target == this.pathRef.current) {
@@ -110,9 +111,14 @@ export default class Container extends React.Component {
         cy={this.state.cy}
         isDragging={this.state.isDragging}
         activePoint={this.state.activePoint}
-        name={point.name}
+        name={this.state.name}
       />
     );
+  }
+
+  handleNameChange(e) {
+    console.log(e.target.value)
+    this.setState({name: e.target.value});
   }
 
   render() {
@@ -135,7 +141,11 @@ export default class Container extends React.Component {
           {this.state.points.map(point => this.renderPoint(point))}
         </svg>
 
-        <input type="text" value="seefef"/>
+        <input
+          type="text"
+          value={this.state.name}
+          onChange={this.handleNameChange.bind(this)}
+        />
       </div>
     );
   }

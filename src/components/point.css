@@ -13,7 +13,9 @@
 }
 
 .pointName {
-    font-size: 5px;
+    font-size: 2.5px;
+    text-align: center;
+    fill: blue;
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */
