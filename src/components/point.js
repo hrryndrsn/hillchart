@@ -1,4 +1,5 @@
 import React from 'react'
+import "./point.css"
 
 export default class Container extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class Container extends React.Component {
             cx: this.props.cx,
             cy: this.props.cy,
             id: this.props.id,
+            isDragging: false,
             selected: false,
             r: "2.5"
         }
@@ -18,15 +20,13 @@ export default class Container extends React.Component {
     selected() {
         console.log("selected point: ", this.state.id)
         this.setState({
-            color: "red",
-            r: "3",
+            selected: true
         })
     }
 
     deselected() {
         this.setState({
-            color: "#000",
-            r: "2.5", 
+            selected: false,
         })
     }
 
@@ -34,17 +34,29 @@ export default class Container extends React.Component {
         this.cords = {
             x: e.pageX,
             y: e.pageY,
+            isDragging: e.target.id == this.state.id,
         }
+        console.log(e.target.id == this.state.id)
         document.addEventListener('mousemove', this.handleMouseMove);
     }
 
     handleMouseMove = (e) => {
-        this.setState({x: this.props.cx, y: this.props.cy})
+        this.setState({
+            x: this.props.cx, 
+            y: this.props.cy,
+        })
     }
 
     handleMouseUp = () => {
-        console.log('mouse up')
         document.removeEventListener('mousemove', this.handleMouseMove);
+    }
+
+    renderClassList = () => {
+        if (this.props.activePoint == this.state.id) {
+            return "active"
+        } else {
+            return "point"
+        }
     }
 
     render() {
@@ -65,6 +77,7 @@ export default class Container extends React.Component {
             onMouseDown={this.handleMouseDown}
             onMouseUp={this.handleMouseUp}
             id={id}
+            className={this.props.activePoint == this.state.id ? "active point" : "point"}
             />
     
     }

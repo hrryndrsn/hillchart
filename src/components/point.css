@@ -1,0 +1,13 @@
+.point {
+    fill:black;
+    transition: fill r  0.2s ease-in-out;
+}
+
+.point:hover {
+    fill: blue;
+}
+
+.point.active {
+    fill: blue;
+    r: 3;
+}

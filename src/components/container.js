@@ -18,6 +18,7 @@ export default class Container extends React.Component {
         selectedPoint: 0,
         uid: 2,
         isDragging: false,
+        activePoint: 0,
       };
 
       this.containerRef = React.createRef();
@@ -70,7 +71,6 @@ export default class Container extends React.Component {
         selectedPoint = parseInt(e.target.id)
       }
       
-      
       this.setState({ 
         x: e.screenX, 
         y: e.screenY,  
@@ -82,8 +82,8 @@ export default class Container extends React.Component {
     }
 
     handleMouseDown(e) {
-      this.setState({isDragging: true});
-
+      let activePoint = parseInt(e.target.id);
+      this.setState({isDragging: true, activePoint: activePoint});
       if (this.state.selectedPoint === 0) {
         this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
         var i = this.state.uid + 1
@@ -93,7 +93,7 @@ export default class Container extends React.Component {
     }
 
     handleMouseUp(e) {
-      this.setState({isDragging: false});
+      this.setState({isDragging: false, activePoint: 0});
     }
 
     renderPoint(point) {      
@@ -105,6 +105,7 @@ export default class Container extends React.Component {
         cx={this.state.cx}
         cy={this.state.cy}
         isDragging={this.state.isDragging}
+        activePoint={this.state.activePoint}
         />
     }
 
