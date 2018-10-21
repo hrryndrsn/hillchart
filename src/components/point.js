@@ -13,7 +13,6 @@ export default class Container extends React.Component {
         }
     }
     
-    
     selected() {
         console.log("selected point: ", this.state.id)
         this.setState({
@@ -30,17 +29,18 @@ export default class Container extends React.Component {
     }
 
     render() {
+        const {x, y, id, color, r} = this.state
         return <circle 
-            cx={this.props.x} 
-            cy={this.props.y}
-            key={this.props.id} 
-            r={this.state.r}
-            fill={this.state.color}
+            cx={x} 
+            cy={y}
+            key={id} 
+            r={r}
+            fill={color}
             stroke="#fff"
             strokeWidth="1"
             onMouseEnter={this.selected.bind(this)}
             onMouseLeave={this.deselected.bind(this)}
-            id={this.state.id}
+            id={id}
             />
     
     }

@@ -59,7 +59,7 @@ export default class Container extends React.Component {
       var crds = this.pathRef.current.getPointAtLength(relPct)
       var selectedPoint;
 
-      if (e.target.id == "") {
+      if (e.target.id === "") {
         selectedPoint = 0
       } else {
         selectedPoint = parseInt(e.target.id)
@@ -78,14 +78,12 @@ export default class Container extends React.Component {
 
 
     handleClick(e) {
-      if (this.state.selectedPoint == 0) {
+      if (this.state.selectedPoint === 0) {
         this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
         var i = this.state.uid + 1
         this.setState({uid: i})
         return
-      } {
-        return
-      }
+      } 
     }
 
     renderPoint(point) {      
