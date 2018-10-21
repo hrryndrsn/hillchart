@@ -7,8 +7,8 @@ export default class Container extends React.Component {
   constructor(props) {
       super(props);
       this.state = { 
-        x: this.props.x, 
-        y: this.props.y,
+        x: 0,
+        y: 0,
         h: window.innerHeight,
         w: window.innerWidth,
         cx: 0,
