@@ -13,6 +13,7 @@ export default class Container extends React.Component {
       id: this.props.id,
       isDragging: false,
       selected: false,
+      name: this.props.name,
       r: "2.5"
     };
   }

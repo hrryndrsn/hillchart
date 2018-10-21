@@ -1,33 +1,32 @@
 .point {
-    fill:black;
-    transition: r 0.2s ease-in-out;
+  fill: #2b2d42;
+  transition: r 0.2s ease-in-out;
 }
 
 .point:hover {
-    fill:grey;
+  fill: grey;
 }
 
 .point.active {
-    fill: blue;
-    r: 3;
+  fill: blue;
+  r: 3;
 }
 
 .point.selected {
-    fill: red;
-    r: 3;
+  fill: red;
+  r: 3;
 }
 
 .pointName {
-    font-size: 2.5px;
-    text-align: center;
-    fill: blue;
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
+  font-size: 2.5px;
+  text-align: center;
+  fill: black;
+  /* mix-blend-mode: exclusion; */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
-  }
-
-  
+}

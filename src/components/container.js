@@ -81,11 +81,9 @@ export default class Container extends React.Component {
   }
 
   handleMouseDown(e) {
-    
     let activePoint = parseInt(e.target.id);
     this.setState({ isDragging: true, activePoint: activePoint });
-
-    //if no point is hovered and the target of the event was the path (hill) -> Add a new point 
+    //if no point is hovered and the target of the event was the path (hill) -> Add a new point
     if (this.state.hoveredPoint === 0 && e.target == this.pathRef.current) {
       this.state.points.push({
         name: "heuy",
@@ -97,14 +95,16 @@ export default class Container extends React.Component {
       this.setState({ uid: i });
       return;
     } else if (e.target.id != "") {
-      let newSelection = parseInt(e.target.id)
-      this.setState({selectedPoint: newSelection})
+      //set the selected point
+      let newSelection = parseInt(e.target.id);
+      this.setState({ selectedPoint: newSelection });
       return;
-    } else {
-      this.setState({selectedPoint: 0})
+    } 
+    else if (e.target.id === "main") {
+      //delect and selected point
+      this.setState({ selectedPoint: 0 });
     }
-
-
+    return
   }
 
   handleMouseUp(e) {
@@ -123,12 +123,33 @@ export default class Container extends React.Component {
         isDragging={this.state.isDragging}
         activePoint={this.state.activePoint}
         selectedPoint={this.state.selectedPoint}
-        name={this.state.name}
+        name={point.name}
       />
     );
   }
 
   handleNameChange(e) {
+    const points = this.state.points;
+    
+
+    for (let i = 0; i < points.length; i++) {
+      if (points[i].id === this.state.selectedPoint) {
+        points[i].name = e.target.value
+        this.setState ({
+          points
+        })
+      }
+    }
+
+    // this.state.points.map(point => {
+    //        (point.id > 1) {
+    //        if (point.id === this.state.selectedPoint) {
+    //           console.log(point.name)
+    //        }
+    //      }
+      
+    // })
+    console.log(e.target.value)
     this.setState({ name: e.target.value });
   }
 
@@ -142,7 +163,7 @@ export default class Container extends React.Component {
         onMouseMove={this._onMouseMove.bind(this)}
       >
         <div id="obj" />
-        <svg width="100%" height="63%" viewBox="0 0 100 63" fill="none">
+        <svg id="main" width="100%" height="63%" viewBox="0 0 100 63" fill="none">
           <path
             d="M5 43.9307C27.3438 43.9307 27.5 16 50 16C72.5 16 72.6562 43.9307 95 43.9307"
             stroke="black"
