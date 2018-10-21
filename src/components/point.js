@@ -7,6 +7,8 @@ export default class Container extends React.Component {
             color: "#000",
             x: this.props.x,
             y: this.props.y,
+            cx: this.props.cx,
+            cy: this.props.cy,
             id: this.props.id,
             selected: false,
             r: "2.5"
@@ -28,8 +30,28 @@ export default class Container extends React.Component {
         })
     }
 
+    handleMouseDown = (e) => {
+        this.cords = {
+            x: e.pageX,
+            y: e.pageY,
+        }
+        document.addEventListener('mousemove', this.handleMouseMove);
+    }
+
+    handleMouseMove = (e) => {
+        this.setState({x: this.props.cx, y: this.props.cy})
+    }
+
+    handleMouseUp = () => {
+        console.log('mouse up')
+        document.removeEventListener('mousemove', this.handleMouseMove);
+    }
+
     render() {
         const {x, y, id, color, r} = this.state
+        if (!(this.props.isDragging)) {
+            document.removeEventListener('mousemove', this.handleMouseMove);
+        } 
         return <circle 
             cx={x} 
             cy={y}
@@ -40,6 +62,8 @@ export default class Container extends React.Component {
             strokeWidth="1"
             onMouseEnter={this.selected.bind(this)}
             onMouseLeave={this.deselected.bind(this)}
+            onMouseDown={this.handleMouseDown}
+            onMouseUp={this.handleMouseUp}
             id={id}
             />
     

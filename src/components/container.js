@@ -17,6 +17,7 @@ export default class Container extends React.Component {
         points: [],
         selectedPoint: 0,
         uid: 2,
+        isDragging: false,
       };
 
       this.containerRef = React.createRef();
@@ -76,8 +77,9 @@ export default class Container extends React.Component {
       }); 
     }
 
+    handleMouseDown(e) {
+      this.setState({isDragging: true});
 
-    handleClick(e) {
       if (this.state.selectedPoint === 0) {
         this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
         var i = this.state.uid + 1
@@ -86,18 +88,33 @@ export default class Container extends React.Component {
       } 
     }
 
+    handleMouseUp(e) {
+      this.setState({isDragging: false});
+    }
+
     renderPoint(point) {      
       return <Point 
         key={point.id} 
         x={point.x} 
         y={point.y}
         id={point.id}
+        cx={this.state.cx}
+        cy={this.state.cy}
+        isDragging={this.state.isDragging}
         />
     }
 
   
     render() {      
-      return <div className="container" ref={this.containerRef} onClick={this.handleClick.bind(this)} onMouseMove={this._onMouseMove.bind(this)}>
+      return (
+      
+      <div 
+        className="container" 
+        ref={this.containerRef} 
+        onMouseDown={this.handleMouseDown.bind(this)} 
+        onMouseUp={this.handleMouseUp.bind(this)}
+        onMouseMove={this._onMouseMove.bind(this)}
+        >
         <div id="obj"></div>
         <svg width="100%" height="63%" viewBox="0 0 100 63" fill="none">
               <path 
@@ -112,7 +129,7 @@ export default class Container extends React.Component {
 
             </svg>
 
-      </div>;
+      </div>)
     }
   }
 
