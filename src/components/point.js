@@ -61,10 +61,15 @@ export default class Container extends React.Component {
 
     render() {
         const {x, y, id, color, r} = this.state
+        const xOffset = 5
+        const yOffset = 5
         if (!(this.props.isDragging)) {
             document.removeEventListener('mousemove', this.handleMouseMove);
         } 
-        return <circle 
+        return (
+        <svg>
+        <text x={this.state.x - xOffset} y={this.state.y - yOffset} className="pointName" fill={color}>{this.props.name}</text>
+        <circle 
             cx={x} 
             cy={y}
             key={id} 
@@ -79,6 +84,7 @@ export default class Container extends React.Component {
             id={id}
             className={this.props.activePoint === this.state.id ? "active point" : "point"}
             />
-    
+        </svg>
+        )
     }
 }

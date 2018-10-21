@@ -85,7 +85,7 @@ export default class Container extends React.Component {
       let activePoint = parseInt(e.target.id);
       this.setState({isDragging: true, activePoint: activePoint});
       if (this.state.selectedPoint === 0) {
-        this.state.points.push({name: 'zord', id: this.state.uid, x: this.state.cx, y: this.state.cy})
+        this.state.points.push({name: 'heuy', id: this.state.uid, x: this.state.cx, y: this.state.cy})
         var i = this.state.uid + 1
         this.setState({uid: i})
         return
@@ -97,7 +97,8 @@ export default class Container extends React.Component {
     }
 
     renderPoint(point) {      
-      return <Point 
+      return (
+      <Point 
         key={point.id} 
         x={point.x} 
         y={point.y}
@@ -106,7 +107,8 @@ export default class Container extends React.Component {
         cy={this.state.cy}
         isDragging={this.state.isDragging}
         activePoint={this.state.activePoint}
-        />
+        name={point.name}
+        />)
     }
 
   
@@ -122,6 +124,7 @@ export default class Container extends React.Component {
         >
         <div id="obj"></div>
         <svg width="100%" height="63%" viewBox="0 0 100 63" fill="none">
+              
               <path 
                 d="M5 43.9307C27.3438 43.9307 27.5 16 50 16C72.5 16 72.6562 43.9307 95 43.9307" 
                 stroke="black" 
