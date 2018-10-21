@@ -9,8 +9,8 @@ export default class Container extends React.Component {
       this.state = { 
         x: 0,
         y: 0,
-        h: window.innerHeight,
-        w: window.innerWidth,
+        h: 0,
+        w: 0,
         cx: 0,
         cy: 0,
         curvePct: 0.0,
@@ -26,6 +26,10 @@ export default class Container extends React.Component {
     }
 
     componentDidMount() {
+      this.setState({
+        h: window.innerHeight,
+        w: window.innerWidth,
+      })
       window.addEventListener("resize", this.updateDimensions);
     }
 
@@ -43,7 +47,7 @@ export default class Container extends React.Component {
     pointOnCrv(pct) {
       var length = this.pathRef.current.getTotalLength();
       var containerWidth = this.state.w * 0.8
-      var offset = (this.state.w - (window.innerWidth * 0.8)) / 2
+      var offset = (this.state.w - (this.state.w * 0.8)) / 2
       var relPct = ((this.state.x - offset)/containerWidth) * length
       var crds = this.pathRef.current.getPointAtLength(relPct)
       return crds;
@@ -53,7 +57,7 @@ export default class Container extends React.Component {
     _onMouseMove(e) {
       //find point on the curve
       var length = this.pathRef.current.getTotalLength();
-      var offset = (this.state.w - (window.innerWidth * 0.8)) / 2
+      var offset = (this.state.w - (this.state.w * 0.8)) / 2
       var containerWidth = this.state.w * 0.8
       var pct = Math.floor(((e.screenX - offset)/containerWidth)*100) / 100
       var relPct = ((e.screenX - offset)/containerWidth) * length
