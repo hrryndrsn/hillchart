@@ -1,10 +1,11 @@
 .point {
-  fill: #2b2d42;
+  fill: #8D99AE;
   transition: r 0.2s ease-in-out;
+  stroke: #EDF2F4
 }
 
 .point:hover {
-  fill: grey;
+  fill: #BACAE5
 }
 
 .point.active {
@@ -13,7 +14,7 @@
 }
 
 .point.selected {
-  fill: red;
+  fill: #2B2D42;
   r: 3;
 }
 
@@ -22,6 +23,7 @@
   text-align: center;
   fill: black;
   /* mix-blend-mode: exclusion; */
+  margin: -50px;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */

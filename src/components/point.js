@@ -1,11 +1,11 @@
 import React from "react";
 import "./point.css";
 
-export default class Container extends React.Component {
+export default class Point extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: "#000",
+      // color: "#8D99AE",
       x: this.props.x,
       y: this.props.y,
       cx: this.props.cx,
@@ -81,8 +81,9 @@ export default class Container extends React.Component {
           cy={y}
           key={id}
           r={r}
+          name={this.props.name}
           fill={color}
-          stroke="#fff"
+          stroke="#EDF2F4"
           strokeWidth="1"
           onMouseEnter={this.selected.bind(this)}
           onMouseLeave={this.deselected.bind(this)}

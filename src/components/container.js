@@ -108,6 +108,7 @@ export default class Container extends React.Component {
   }
 
   handleMouseUp(e) {
+    this.findSelectedPoint();
     this.setState({ isDragging: false, activePoint: 0 });
   }
 
@@ -128,9 +129,21 @@ export default class Container extends React.Component {
     );
   }
 
+  findSelectedPoint() {
+    const points = this.state.points;
+    for (let i = 0; i < points.length; i++) {
+      if (points[i].id === this.state.selectedPoint) {
+        this.setState({name: points[i].name})
+        console.log(points[i].name)
+      } else {
+        
+      }
+    }
+
+  } 
+
   handleNameChange(e) {
     const points = this.state.points;
-    
 
     for (let i = 0; i < points.length; i++) {
       if (points[i].id === this.state.selectedPoint) {
@@ -141,15 +154,6 @@ export default class Container extends React.Component {
       }
     }
 
-    // this.state.points.map(point => {
-    //        (point.id > 1) {
-    //        if (point.id === this.state.selectedPoint) {
-    //           console.log(point.name)
-    //        }
-    //      }
-      
-    // })
-    console.log(e.target.value)
     this.setState({ name: e.target.value });
   }
 
@@ -166,7 +170,7 @@ export default class Container extends React.Component {
         <svg id="main" width="100%" height="63%" viewBox="0 0 100 63" fill="none">
           <path
             d="M5 43.9307C27.3438 43.9307 27.5 16 50 16C72.5 16 72.6562 43.9307 95 43.9307"
-            stroke="black"
+            stroke="#2B2D42"
             strokeWidth="1"
             ref={this.pathRef}
           />
