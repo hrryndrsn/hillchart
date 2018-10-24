@@ -1,5 +1,6 @@
 import React from "react";
 import "./point.css";
+import nameEditor from "./nameEditor";
 
 export default class Point extends React.Component {
   constructor(props) {
@@ -68,9 +69,10 @@ export default class Point extends React.Component {
     }
     return (
       <svg>
+        <rect x={this.state.x + 5} y={this.state.y - 2.5} width="15" height="5" className="rect"/>
         <text
-          x={this.state.x - xOffset}
-          y={this.state.y - yOffset}
+          x={this.state.x + 6}
+          y={this.state.y + 0.6}
           className="pointName"
           fill={color}
         >

@@ -1,11 +1,11 @@
 .point {
-  fill: #8D99AE;
+  fill: #8d99ae;
   transition: r 0.2s ease-in-out;
-  stroke: #EDF2F4
+  stroke: #edf2f4;
 }
 
 .point:hover {
-  fill: #BACAE5
+  fill: #bacae5;
 }
 
 .point.active {
@@ -14,7 +14,7 @@
 }
 
 .point.selected {
-  fill: #2B2D42;
+  fill: #2b2d42;
   r: 3;
 }
 
@@ -31,4 +31,10 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
+}
+
+.rect {
+  fill: rgb(255, 255, 255, 0.7);
+  stroke-width: 3;
+  /* stroke: rgb(0, 0, 0); */
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./container.css";
 import Point from "./point";
+import Editor from "./nameEditor";
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -81,6 +82,7 @@ export default class Container extends React.Component {
   }
 
   handleMouseDown(e) {
+    console.log(e.target)
     let activePoint = parseInt(e.target.id);
     this.setState({ isDragging: true, activePoint: activePoint });
     //if no point is hovered and the target of the event was the path (hill) -> Add a new point
@@ -94,6 +96,9 @@ export default class Container extends React.Component {
       var i = this.state.uid + 1;
       this.setState({ uid: i });
       return;
+    } else if (e.target.id === "nameInput") {
+      console.log("input")
+
     } else if (e.target.id != "") {
       //set the selected point
       let newSelection = parseInt(e.target.id);
@@ -176,11 +181,17 @@ export default class Container extends React.Component {
           />
           {this.state.points.map(point => this.renderPoint(point))}
         </svg>
-
         <input
           type="text"
+          id="nameInput"
           value={this.state.name}
           onChange={this.handleNameChange.bind(this)}
+          style={{
+            "position": "absolute",
+            "top": this.state.y,
+            "left": this.state.x,
+            "display": this.state.selectedPoint ? "initial" : "none",
+          }}
         />
       </div>
     );
