@@ -184,8 +184,8 @@ export default class Container extends React.Component {
         </svg>
         <Editor
           name={this.state.name}
-          x={this.state.x}
-          y={this.state.y}
+          x={0}
+          y={0}
           selectedPoint={this.state.selectedPoint}
           onChange={this.handleNameChange.bind(this)}
         />

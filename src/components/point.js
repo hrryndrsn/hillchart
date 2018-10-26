@@ -72,7 +72,7 @@ export default class Point extends React.Component {
     }
     return (
       <svg>
-        <rect x={this.state.x + 5} y={this.state.y - 2.5} width="15" height="5" className="rect"/>
+        {/* <rect x={this.state.x + 5} y={this.state.y - 2.5} width="15" height="5" className="rect"/> */}
         <text
           x={this.state.x + 6}
           y={this.state.y + 0.6}
