@@ -1,7 +1,7 @@
 import React from "react";
 import "./container.css";
 import Point from "./point";
-import Editor from "./nameEditor";
+import Editor from "./editor";
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -82,7 +82,6 @@ export default class Container extends React.Component {
   }
 
   handleMouseDown(e) {
-    console.log(e.target)
     let activePoint = parseInt(e.target.id);
     this.setState({ isDragging: true, activePoint: activePoint });
     //if no point is hovered and the target of the event was the path (hill) -> Add a new point
@@ -97,19 +96,17 @@ export default class Container extends React.Component {
       this.setState({ uid: i });
       return;
     } else if (e.target.id === "nameInput") {
-      console.log("input")
-
+      console.log("input");
     } else if (e.target.id != "") {
       //set the selected point
       let newSelection = parseInt(e.target.id);
       this.setState({ selectedPoint: newSelection });
       return;
-    } 
-    else if (e.target.id === "main") {
+    } else if (e.target.id === "main") {
       //delect and selected point
       this.setState({ selectedPoint: 0 });
     }
-    return
+    return;
   }
 
   handleMouseUp(e) {
@@ -138,24 +135,22 @@ export default class Container extends React.Component {
     const points = this.state.points;
     for (let i = 0; i < points.length; i++) {
       if (points[i].id === this.state.selectedPoint) {
-        this.setState({name: points[i].name})
-        console.log(points[i].name)
+        this.setState({ name: points[i].name });
+        console.log(points[i].name);
       } else {
-        
       }
     }
-
-  } 
+  }
 
   handleNameChange(e) {
     const points = this.state.points;
 
     for (let i = 0; i < points.length; i++) {
       if (points[i].id === this.state.selectedPoint) {
-        points[i].name = e.target.value
-        this.setState ({
+        points[i].name = e.target.value;
+        this.setState({
           points
-        })
+        });
       }
     }
 
@@ -172,7 +167,13 @@ export default class Container extends React.Component {
         onMouseMove={this._onMouseMove.bind(this)}
       >
         <div id="obj" />
-        <svg id="main" width="100%" height="63%" viewBox="0 0 100 63" fill="none">
+        <svg
+          id="main"
+          width="100%"
+          height="63%"
+          viewBox="0 0 100 63"
+          fill="none"
+        >
           <path
             d="M5 43.9307C27.3438 43.9307 27.5 16 50 16C72.5 16 72.6562 43.9307 95 43.9307"
             stroke="#2B2D42"
@@ -181,17 +182,12 @@ export default class Container extends React.Component {
           />
           {this.state.points.map(point => this.renderPoint(point))}
         </svg>
-        <input
-          type="text"
-          id="nameInput"
-          value={this.state.name}
+        <Editor
+          name={this.state.name}
+          x={this.state.x}
+          y={this.state.y}
+          selectedPoint={this.state.selectedPoint}
           onChange={this.handleNameChange.bind(this)}
-          style={{
-            "position": "absolute",
-            "top": this.state.y,
-            "left": this.state.x,
-            "display": this.state.selectedPoint ? "initial" : "none",
-          }}
         />
       </div>
     );

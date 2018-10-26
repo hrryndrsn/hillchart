@@ -1,6 +1,6 @@
 import React from "react";
 import "./point.css";
-import nameEditor from "./nameEditor";
+import nameEditor from "./editor";
 
 export default class Point extends React.Component {
   constructor(props) {
@@ -59,6 +59,9 @@ export default class Point extends React.Component {
       return "point";
     }
   };
+  handleNameChange(e) {
+    console.log(e)
+  }
 
   render() {
     const { x, y, id, color, r } = this.state;
