@@ -25,9 +25,7 @@ export default class Point extends React.Component {
       selected: true
     });
   }
-  componentDidUpdate() {
-    this.positionLabel()
-  }
+
 
   deselected() {
     this.setState({
@@ -41,7 +39,6 @@ export default class Point extends React.Component {
       y: e.pageY,
       isDragging: e.target.id === this.state.id
     };
-    this.positionLabel();
     document.addEventListener("mousemove", this.handleMouseMove);
   };
 
@@ -67,18 +64,6 @@ export default class Point extends React.Component {
     console.log(e)
   }
 
-  positionLabel() {
-    let x = this.state.x;
-    let y = this.state.y;
-    if (x > 35 && x < 65) {
-      console.log("top to top")
-    } else if (x > 65 && x < 80) {
-      console.log("pop side")
-    } else if (x > 80) {
-      console.log("top to top")
-    }
-    return x + 6.0
-  }
 
   render() {
     const { x, y, id, color, r } = this.state;

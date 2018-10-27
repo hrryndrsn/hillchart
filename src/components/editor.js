@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const EditorContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 100px;
   position: absolute;
   top: -50px;
   left: 0;
@@ -28,7 +28,7 @@ const EditorContainer = styled.div`
 
 const LabelDiv = styled.div`
   height: 100%;
-  line-height: 50px;
+  line-height: 100px;
   font-size: 0.5em;
   margin-right: 20px;
   color: rgba(0, 0, 0, 0.4);

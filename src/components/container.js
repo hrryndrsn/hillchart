@@ -87,7 +87,7 @@ export default class Container extends React.Component {
     //if no point is hovered and the target of the event was the path (hill) -> Add a new point
     if (this.state.hoveredPoint === 0 && e.target == this.pathRef.current) {
       this.state.points.push({
-        name: "heuy",
+        name: "new point",
         id: this.state.uid,
         x: this.state.cx,
         y: this.state.cy
@@ -96,7 +96,6 @@ export default class Container extends React.Component {
       this.setState({ uid: i });
       return;
     } else if (e.target.id === "nameInput") {
-      console.log("input");
     } else if (e.target.id != "") {
       //set the selected point
       let newSelection = parseInt(e.target.id);
@@ -136,7 +135,6 @@ export default class Container extends React.Component {
     for (let i = 0; i < points.length; i++) {
       if (points[i].id === this.state.selectedPoint) {
         this.setState({ name: points[i].name });
-        console.log(points[i].name);
       } else {
       }
     }
