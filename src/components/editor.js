@@ -10,7 +10,7 @@ const EditorContainer = styled.div`
   display: flex;
   justify-content: center;
   background: ${props => (props.selectedPoint ? "white" : "none")};
-  transition: 0.2s ease-in;
+  transition: 0.2s ease-in-out;
   font-size: 2em;
   & input {
     font-size: 1em;

@@ -6,11 +6,12 @@ export default class Point extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // color: "#8D99AE",
       x: this.props.x,
       y: this.props.y,
       cx: this.props.cx,
       cy: this.props.cy,
+      tx: 6,
+      ty: 0.6,
       id: this.props.id,
       isDragging: false,
       selected: false,
@@ -23,6 +24,9 @@ export default class Point extends React.Component {
     this.setState({
       selected: true
     });
+  }
+  componentDidUpdate() {
+    this.positionLabel()
   }
 
   deselected() {
@@ -37,7 +41,7 @@ export default class Point extends React.Component {
       y: e.pageY,
       isDragging: e.target.id === this.state.id
     };
-
+    this.positionLabel();
     document.addEventListener("mousemove", this.handleMouseMove);
   };
 
@@ -63,19 +67,32 @@ export default class Point extends React.Component {
     console.log(e)
   }
 
+  positionLabel() {
+    let x = this.state.x;
+    let y = this.state.y;
+    if (x > 35 && x < 65) {
+      console.log("top to top")
+    } else if (x > 65 && x < 80) {
+      console.log("pop side")
+    } else if (x > 80) {
+      console.log("top to top")
+    }
+    return x + 6.0
+  }
+
   render() {
     const { x, y, id, color, r } = this.state;
-    const xOffset = 5;
-    const yOffset = 5;
+    const xOffset = (this.state.x > 35) && (x < 65) || (x > 80) ? -6 : 6;
+    const yOffset = (this.state.x > 35) && (x < 65) || (x > 80) ? -5 : 0.6;
+
     if (!this.props.isDragging) {
       document.removeEventListener("mousemove", this.handleMouseMove);
     }
     return (
       <svg>
-        {/* <rect x={this.state.x + 5} y={this.state.y - 2.5} width="15" height="5" className="rect"/> */}
         <text
-          x={this.state.x + 6}
-          y={this.state.y + 0.6}
+          x={(this.state.x + xOffset)}
+          y={this.state.y + yOffset}
           className="pointName"
           fill={color}
         >
