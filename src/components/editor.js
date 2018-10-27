@@ -5,21 +5,32 @@ const EditorContainer = styled.div`
     width: 100%;
     height: 50px;
     position: absolute;
-    top: 0;
+    top: -50px;
     left: 0;
-    ${'' /* background: ${props => props.selectedPoint ? "red" : "blue"} */}
     display: flex;
     justify-content: center;
+    background: ${props => props.selectedPoint ? "white": "none"};
+    transition: 0.2s ease-in;
+    font-size: 2em;
+    & input {
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+    &.active {
+        top: 0px;
+    }
 `
 
 
 export default class Container extends React.Component {
   render() {
-    const x = this.props.x 
-    const y = this.props.y 
-    console.log(x, y)
     return (
-        <EditorContainer>
+        <EditorContainer selectedPoint={this.props.selectedPoint} className={this.props.selectedPoint ? "active" : ""}>
             <input
                 type="text"
                 id="nameInput"
@@ -27,7 +38,6 @@ export default class Container extends React.Component {
                 onChange={this.props.onChange}
                 autoFocus={true}
                 style={{
-
                 display: this.props.selectedPoint ? "initial" : "none"
                 }}
             />
