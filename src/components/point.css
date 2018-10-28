@@ -1,20 +1,22 @@
 .point {
-  fill: #8d99ae;
-  transition: r 0.2s ease-in-out;
+  /* fill: #8d99ae; */
+  transition:  r 0.2s ease-in-out;
   stroke: #edf2f4;
 }
 
 .point:hover {
-  fill: #bacae5;
+  /* fill: #bacae5; */
+  r: 3;
 }
 
 .point.active {
-  fill: blue;
+  /* fill: blue; */
   r: 3;
 }
 
 .point.selected {
-  fill: #2b2d42;
+  /* fill: #2b2d42; */
+  stroke: white;
   r: 3;
 }
 

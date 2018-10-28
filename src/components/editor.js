@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const EditorContainer = styled.div`
   width: 100%;
-  height: 100px;
+  height: 75px;
   position: absolute;
   top: -50px;
   left: 0;
@@ -28,11 +28,11 @@ const EditorContainer = styled.div`
 
 const LabelDiv = styled.div`
   height: 100%;
-  line-height: 100px;
+  line-height: 75px;;
   font-size: 0.5em;
   margin-right: 20px;
   color: rgba(0, 0, 0, 0.4);
-  padding-top: 3px;
+  padding-top: 4px;
   display: ${props => (props.selectedPoint ? "white" : "none")};
 `;
 
@@ -60,3 +60,5 @@ export default class Container extends React.Component {
     );
   }
 }
+
+

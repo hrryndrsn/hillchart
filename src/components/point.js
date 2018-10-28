@@ -1,11 +1,11 @@
 import React from "react";
 import "./point.css";
-import nameEditor from "./editor";
 
 export default class Point extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      color: this.props.color,
       x: this.props.x,
       y: this.props.y,
       cx: this.props.cx,
@@ -69,7 +69,6 @@ export default class Point extends React.Component {
     const { x, y, id, color, r } = this.state;
     const xOffset = (this.state.x > 35) && (x < 65) || (x > 80) ? -6 : 6;
     const yOffset = (this.state.x > 35) && (x < 65) || (x > 80) ? -5 : 0.6;
-
     if (!this.props.isDragging) {
       document.removeEventListener("mousemove", this.handleMouseMove);
     }
@@ -89,7 +88,7 @@ export default class Point extends React.Component {
           key={id}
           r={r}
           name={this.props.name}
-          fill={color}
+          fill={this.state.color}
           stroke="#EDF2F4"
           strokeWidth="1"
           onMouseEnter={this.selected.bind(this)}

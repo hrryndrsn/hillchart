@@ -20,7 +20,8 @@ export default class Container extends React.Component {
       isDragging: false,
       activePoint: 0,
       selectedPoint: 0,
-      name: "zord"
+      name: "zord", 
+      colors: ["#FFBE0B", "#FB5607", "#FF006E", "#8338EC", "#3A86FF", "#3BCEAC", "#0EAD69"]
     };
 
     this.containerRef = React.createRef();
@@ -82,6 +83,7 @@ export default class Container extends React.Component {
   }
 
   handleMouseDown(e) {
+    let color = this.randomColor();
     let activePoint = parseInt(e.target.id);
     this.setState({ isDragging: true, activePoint: activePoint });
     //if no point is hovered and the target of the event was the path (hill) -> Add a new point
@@ -90,7 +92,8 @@ export default class Container extends React.Component {
         name: "new point",
         id: this.state.uid,
         x: this.state.cx,
-        y: this.state.cy
+        y: this.state.cy,
+        color: color
       });
       var i = this.state.uid + 1;
       this.setState({ uid: i });
@@ -126,6 +129,7 @@ export default class Container extends React.Component {
         activePoint={this.state.activePoint}
         selectedPoint={this.state.selectedPoint}
         name={point.name}
+        color={point.color}
       />
     );
   }
@@ -153,6 +157,12 @@ export default class Container extends React.Component {
     }
 
     this.setState({ name: e.target.value });
+  }
+
+  randomColor() {
+    const number = Math.floor(Math.random() * this.state.colors.length);
+    const color = this.state.colors[number]
+    return color;
   }
 
   render() {
