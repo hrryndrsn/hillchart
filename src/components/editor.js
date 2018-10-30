@@ -9,7 +9,9 @@ const EditorContainer = styled.div`
   left: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   background: ${props => (props.selectedPoint ? "white" : "none")};
+  visibility: ${props => (props.selectedPoint ? "visible" : "hidden")};
   transition: 0.2s ease-in-out;
   font-size: 2em;
   & input {
@@ -33,8 +35,27 @@ const LabelDiv = styled.div`
   margin-right: 20px;
   color: rgba(0, 0, 0, 0.4);
   padding-top: 4px;
-  display: ${props => (props.selectedPoint ? "white" : "none")};
+  display: ${props => (props.selectedPoint ? "initial" : "none")};
 `;
+
+const DeleteButton = styled.button`
+  visibility: ${props => (props.selectedPoint ? "visible" : "hidden")};
+  color: #D90429;
+  font-size: 0.5em;
+  margin: 0.5em;
+  padding: 0.5em 0.5em;
+  background: none;
+  border: none;
+  border-radius: 30px;
+  transition: background 0.2s ease-in-out;
+  &:focus {
+    outline: none
+  }
+  &:hover {
+    background: #D90429;
+    color: #fff;
+  }
+`
 
 export default class Container extends React.Component {
   render() {
@@ -51,11 +72,11 @@ export default class Container extends React.Component {
           id="nameInput"
           value={this.props.name}
           onChange={this.props.onChange}
-          autoFocus={true}
           style={{
             display: this.props.selectedPoint ? "initial" : "none"
           }}
         />
+        <DeleteButton className="noselect" selectedPoint={this.props.selectedPoint} onClick={this.props.handleDeletePoint}>Delete</DeleteButton>
       </EditorContainer>
     );
   }

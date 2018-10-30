@@ -35,6 +35,7 @@ export default class Container extends React.Component {
       w: window.innerWidth
     });
     window.addEventListener("resize", this.updateDimensions);
+    window.addEventListener("keydown", this.handleKeyPress);
   }
 
   updateDimensions() {
@@ -114,6 +115,15 @@ export default class Container extends React.Component {
   handleMouseUp(e) {
     this.findSelectedPoint();
     this.setState({ isDragging: false, activePoint: 0 });
+  }
+
+  handleDeletePoint = (e) => {
+      if (this.state.selectedPoint) {
+        console.log("point is selected", this.state.selectedPoint)
+        const selectedPoint = this.state.selectedPoint
+        const filteredPoints = this.state.points.filter(point => point.id !== selectedPoint)
+        this.setState({points: filteredPoints, selectedPoint: null})
+      }
   }
 
   renderPoint(point) {
@@ -196,6 +206,7 @@ export default class Container extends React.Component {
           y={0}
           selectedPoint={this.state.selectedPoint}
           onChange={this.handleNameChange.bind(this)}
+          handleDeletePoint={this.handleDeletePoint.bind(this)}
         />
       </div>
     );
