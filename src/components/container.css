@@ -10,11 +10,12 @@ body {
     justify-items: center;
 }
 
-/* #nameInput {
-    position: absolute;
-    top: 50px;
-    right: 100px;
-} */
+.containerLabel {
+    font-size: 1.5px;
+    fill: #BABEBF;
+    font-weight: bold;
+    font-style: italic;
+}
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */

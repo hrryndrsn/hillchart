@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "gatsby": "^2.0.0",
+    "gatsby-cli": "^2.4.4",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "styled-components": "^4.0.2"

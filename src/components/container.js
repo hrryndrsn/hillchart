@@ -20,8 +20,16 @@ export default class Container extends React.Component {
       isDragging: false,
       activePoint: 0,
       selectedPoint: 0,
-      name: "zord", 
-      colors: ["#FFBE0B", "#FB5607", "#FF006E", "#8338EC", "#3A86FF", "#3BCEAC", "#0EAD69"]
+      name: "zord",
+      colors: [
+        "#FFBE0B",
+        "#FB5607",
+        "#FF006E",
+        "#8338EC",
+        "#3A86FF",
+        "#3BCEAC",
+        "#0EAD69"
+      ]
     };
 
     this.containerRef = React.createRef();
@@ -117,14 +125,16 @@ export default class Container extends React.Component {
     this.setState({ isDragging: false, activePoint: 0 });
   }
 
-  handleDeletePoint = (e) => {
-      if (this.state.selectedPoint) {
-        console.log("point is selected", this.state.selectedPoint)
-        const selectedPoint = this.state.selectedPoint
-        const filteredPoints = this.state.points.filter(point => point.id !== selectedPoint)
-        this.setState({points: filteredPoints, selectedPoint: null})
-      }
-  }
+  handleDeletePoint = e => {
+    if (this.state.selectedPoint) {
+      console.log("point is selected", this.state.selectedPoint);
+      const selectedPoint = this.state.selectedPoint;
+      const filteredPoints = this.state.points.filter(
+        point => point.id !== selectedPoint
+      );
+      this.setState({ points: filteredPoints, selectedPoint: null });
+    }
+  };
 
   renderPoint(point) {
     return (
@@ -171,7 +181,7 @@ export default class Container extends React.Component {
 
   randomColor() {
     const number = Math.floor(Math.random() * this.state.colors.length);
-    const color = this.state.colors[number]
+    const color = this.state.colors[number];
     return color;
   }
 
@@ -192,6 +202,22 @@ export default class Container extends React.Component {
           viewBox="0 0 100 63"
           fill="none"
         >
+          <text x={35} y={5} className="containerLabel noselect">
+            Figuring it out
+          </text>
+          <text x={54} y={5} className="containerLabel noselect">
+            Getting it done
+          </text>
+          <line
+            x1="50"
+            y1="1"
+            x2="50"
+            y2="62"
+            stroke="#8D99AE"
+            stroke-opacity="0.2"
+            stroke-width="0.5"
+            stroke-dasharray="2 2"
+          />
           <path
             d="M5 43.9307C27.3438 43.9307 27.5 16 50 16C72.5 16 72.6562 43.9307 95 43.9307"
             stroke="#2B2D42"
